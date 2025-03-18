@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -15,8 +12,8 @@ public class Main {
 
         String[] products = {"Молоко", "Хлеб", "Гречневая крупа"};
         int[] prices = {50, 14, 80};
+        int[] productsAmount = new int[products.length];
         int sumProducts = 0;
-        List<String> purchases = new ArrayList<>();
 
         while (true) {
             System.out.println("Выберите товар и количество или введите `end`");
@@ -29,26 +26,23 @@ public class Main {
             int productNumber = Integer.parseInt(parts[0]) - 1;
             int numberOfProducts = Integer.parseInt(parts[1]);
 
-            int currentPrice = prices[productNumber];
+            productsAmount[productNumber] = productsAmount[productNumber] + numberOfProducts;
 
-
-            String purchaseString = products[productNumber]
-                    + " "
-                    + numberOfProducts
-                    + " шт "
-                    + currentPrice
-                    + " руб/шт "
-                    + currentPrice * numberOfProducts
-                    + " руб в сумме ";
-
-            purchases.add(purchaseString);
-            sumProducts = sumProducts + (currentPrice * numberOfProducts);
-
-
+            int currentPrice = prices[productNumber]; 
+            sumProducts = sumProducts + (currentPrice * numberOfProducts); 
         }
-        System.out.println("Ваша корзина: ");
-        for (String purchaseString : purchases) {
-            System.out.println(purchaseString);
+        for (int productIndex = 0; productIndex < products.length; productIndex++) {
+            if (productsAmount[productIndex] == 0) {
+                continue;
+            }
+            System.out.println(products[productIndex]
+                    + " "
+                    + productsAmount[productIndex]
+                    + " шт "
+                    + prices[productIndex]
+                    + " руб/шт "
+                    + prices[productIndex] * productsAmount[productIndex]
+                    + " руб в сумме ");
         }
         System.out.println("Итого: " + sumProducts);
     }
