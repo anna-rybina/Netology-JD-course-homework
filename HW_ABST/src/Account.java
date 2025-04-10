@@ -21,7 +21,6 @@ public abstract class Account {
             if (account.add(amount)) {
                 return true;
             } else {
-                // Если не удалось добавить на целевой счёт, возвращаем деньги обратно
                 this.add(amount);
             }
         }
