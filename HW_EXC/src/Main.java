@@ -10,7 +10,7 @@ public class Main {
 
             System.out.print("Введите макс. допустимое количество повторений символа подряд: ");
             int maxRepeats = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine();
 
             PasswordChecker checker = new PasswordChecker();
             checker.setMinLength(minLength);
