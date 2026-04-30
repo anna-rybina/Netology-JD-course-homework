@@ -1,40 +1,29 @@
 public class Book {
-    public String title;
-    public int releaseYear;
-    public Author author;
-    public int pages;
+    private String title;
+    private Author author;
+    private int releaseYear;
+    private int pages;
 
-    public Book (String title, int releaseYear, Author author, int pages) {
+    public Book(String title, Author author, int releaseYear, int pages) {
         this.title = title;
-        this.releaseYear = releaseYear;
         this.author = author;
+        this.releaseYear = releaseYear;
         this.pages = pages;
-
     }
 
     public boolean isBig() {
-        if (pages > 500) {
-            return true;
-        } else {
-            return false;
-        }
+        return pages > 500;
     }
 
     public boolean matches(String word) {
-        if (title.contains(word) || author.name.contains(word) || author.surname.contains(word)) {
-            return true;
-        } else {
-            return false;
-        }
+       if (word == null) {
+           return false;
+       }
+       return title.contains(word) || author.matches(word);
     }
 
     public int estimatePrice() {
-        int calculation = (int) Math.floor(pages * 3 * Math.sqrt(author.rating));
-        int price = Math.max(calculation, 250);
-        if (price > 250) {
-            return price;
-        } else {
-            return 250;
-        }
+        int rawPrice = (int) (pages * 3 * Math.sqrt(author.getRating()));
+        return Math.max(rawPrice, 250);
     }
 }
